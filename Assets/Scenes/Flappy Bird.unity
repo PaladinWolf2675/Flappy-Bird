@@ -343,5 +343,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4d433475915af4da3bb3dfcbe19f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationSprites:
+  - {fileID: 1907728578, guid: 76df10c13de1b724d89b37f5cca8dbb0, type: 3}
+  - {fileID: 29646014, guid: 76df10c13de1b724d89b37f5cca8dbb0, type: 3}
+  - {fileID: 1334457002, guid: 76df10c13de1b724d89b37f5cca8dbb0, type: 3}
   gravity: -9.8
-  strength: 5
+  strength: 3

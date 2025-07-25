@@ -2,12 +2,27 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
+    public Sprite[] animationSprites;
+    private int spriteIndex;
+
     private Vector3 playerDirection;
     
     public float gravity = -9.8f;// How fast the bird will fall
     
-    public float strength = 5f;// How high the bird will fly
-    
+    public float strength = 3f;// How high the bird will fly
+
+    private void Awake()
+    {
+        //This will search for the Players Sprite Renderer Component
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
+    }
+
 
     private void Update()
     {
@@ -30,5 +45,17 @@ public class Player : MonoBehaviour
 
         playerDirection.y += gravity * Time.deltaTime;
         transform.position += playerDirection * Time.deltaTime;
+    }
+
+    private void AnimateSprite()
+    {
+        spriteIndex++;
+
+        if (spriteIndex >= animationSprites.Length)
+        {
+            spriteIndex = 0;
+        }
+
+        spriteRenderer.sprite = animationSprites[spriteIndex];
     }
 }
