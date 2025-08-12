@@ -2,9 +2,23 @@
 
 public class Player : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
+    public Sprite[] sprites;
+    private int spriteIndex;
     private Vector3 playerDirection;
     public float gravity = -9.8f;
     public float flapStrenght = 5f;
+
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
+    }
 
     private void Update()
     {
@@ -29,5 +43,18 @@ public class Player : MonoBehaviour
          so as not to cause issues with lower powered systems*/
         playerDirection.y += gravity * Time.deltaTime;
         transform.position += playerDirection * Time.deltaTime;
+    }
+
+
+    private void AnimateSprite()
+    {
+        spriteIndex++;
+
+        if(spriteIndex >= sprites.Length)
+        {
+            spriteIndex = 0;
+        }
+
+        spriteRenderer.sprite = sprites[spriteIndex];
     }
 }
