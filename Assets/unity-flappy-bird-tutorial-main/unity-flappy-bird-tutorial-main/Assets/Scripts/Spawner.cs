@@ -2,27 +2,24 @@
 
 public class Spawner : MonoBehaviour
 {
-    public Pipes prefab;
-    public float spawnRate = 1f;
-    public float minHeight = -1f;
-    public float maxHeight = 2f;
-    public float verticalGap = 3f;
+    public GameObject pipePrefab;
+    public float pipeSpawnRate = 1.0f;
+    public float minHeight = -1.0f;
+    public float maxHeight = 1.0f;
 
     private void OnEnable()
     {
-        InvokeRepeating(nameof(Spawn), spawnRate, spawnRate);
+        InvokeRepeating(nameof(SpawnPipe), pipeSpawnRate, pipeSpawnRate);
     }
 
     private void OnDisable()
     {
-        CancelInvoke(nameof(Spawn));
+        CancelInvoke(nameof(SpawnPipe));
     }
 
-    private void Spawn()
+    private void SpawnPipe()
     {
-        Pipes pipes = Instantiate(prefab, transform.position, Quaternion.identity);
+       GameObject pipes = Instantiate(pipePrefab, transform.position, Quaternion.identity);
         pipes.transform.position += Vector3.up * Random.Range(minHeight, maxHeight);
-        pipes.gap = verticalGap;
     }
-
 }
